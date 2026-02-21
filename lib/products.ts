@@ -8,6 +8,8 @@ export interface ProductTier {
   fatjoeDelivery: number; // INTERNAL ONLY  -  never render to client
   ourDelivery: number; // = fatjoeDelivery + 3
   stripePriceId?: string; // Phase 5
+  note?: string;        // Short callout shown in pricing table
+  mostPopular?: boolean; // Shows "Most Popular" badge on this tier row
 }
 
 export interface Product {
@@ -30,11 +32,13 @@ export type PublicProduct = Omit<Product, "tiers"> & { tiers: PublicProductTier[
 export function toPublicProduct(p: Product): PublicProduct {
   return {
     ...p,
-    tiers: p.tiers.map(({ name, ourPrice, ourDelivery, stripePriceId }) => ({
+    tiers: p.tiers.map(({ name, ourPrice, ourDelivery, stripePriceId, note, mostPopular }) => ({
       name,
       ourPrice,
       ourDelivery,
       stripePriceId,
+      note,
+      mostPopular,
     })),
   };
 }
@@ -51,7 +55,7 @@ export const PRODUCTS: Product[] = [
     tiers: [
       { name: "DR10+", fatjoePrice: 72,  ourPrice: 144,  fatjoeDelivery: 14, ourDelivery: 17 },
       { name: "DR20+", fatjoePrice: 96,  ourPrice: 192,  fatjoeDelivery: 14, ourDelivery: 17 },
-      { name: "DR30+", fatjoePrice: 120, ourPrice: 240,  fatjoeDelivery: 14, ourDelivery: 17 },
+      { name: "DR30+", fatjoePrice: 120, ourPrice: 240,  fatjoeDelivery: 14, ourDelivery: 17, mostPopular: true },
       { name: "DR40+", fatjoePrice: 216, ourPrice: 432,  fatjoeDelivery: 14, ourDelivery: 17 },
       { name: "DR50+", fatjoePrice: 336, ourPrice: 672,  fatjoeDelivery: 14, ourDelivery: 17 },
       { name: "DR60+", fatjoePrice: 456, ourPrice: 912,  fatjoeDelivery: 14, ourDelivery: 17 },
@@ -92,7 +96,7 @@ export const PRODUCTS: Product[] = [
     tiers: [
       { name: "DR10+", fatjoePrice: 75,  ourPrice: 150,   fatjoeDelivery: 14, ourDelivery: 17 },
       { name: "DR20+", fatjoePrice: 120, ourPrice: 240,   fatjoeDelivery: 14, ourDelivery: 17 },
-      { name: "DR30+", fatjoePrice: 150, ourPrice: 300,   fatjoeDelivery: 14, ourDelivery: 17 },
+      { name: "DR30+", fatjoePrice: 150, ourPrice: 300,   fatjoeDelivery: 14, ourDelivery: 17, mostPopular: true },
       { name: "DR40+", fatjoePrice: 270, ourPrice: 540,   fatjoeDelivery: 14, ourDelivery: 17 },
       { name: "DR50+", fatjoePrice: 420, ourPrice: 840,   fatjoeDelivery: 14, ourDelivery: 17 },
       { name: "DR60+", fatjoePrice: 570, ourPrice: 1140,  fatjoeDelivery: 14, ourDelivery: 17 },
@@ -129,7 +133,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Professional legal content written by experienced writers who understand Your Money Your Life (YMYL) standards, practice-area terminology, and the keyword clusters that drive law firm organic traffic. Every article is optimized for natural language processing (NLP) signals, factually reviewed, and delivered ready to publish.",
     tiers: [
-      { name: "Per Article", fatjoePrice: 20, ourPrice: 40, fatjoeDelivery: 4, ourDelivery: 7 },
+      { name: "Per Article", fatjoePrice: 20, ourPrice: 40, fatjoeDelivery: 4, ourDelivery: 7, note: "~1,000 words, Google Doc delivery, human-written" },
     ],
     features: [
       "Human-written by experienced legal content writers",
@@ -260,9 +264,9 @@ export const PRODUCTS: Product[] = [
     description:
       "Professional press release writing and distribution for law firms. Build brand authority, earn news-site mentions, and signal E-E-A-T trustworthiness to Google through legitimate press coverage. Three tiers to match your distribution goals.",
     tiers: [
-      { name: "Basic",    fatjoePrice: 119,  ourPrice: 238,  fatjoeDelivery: 7, ourDelivery: 10 },
-      { name: "Pro",      fatjoePrice: 378,  ourPrice: 756,  fatjoeDelivery: 7, ourDelivery: 10 },
-      { name: "Ultimate", fatjoePrice: 1360, ourPrice: 2720, fatjoeDelivery: 7, ourDelivery: 10 },
+      { name: "Basic",    fatjoePrice: 119,  ourPrice: 238,  fatjoeDelivery: 7, ourDelivery: 10, note: "50-100 guaranteed news syndications" },
+      { name: "Pro",      fatjoePrice: 378,  ourPrice: 756,  fatjoeDelivery: 7, ourDelivery: 10, note: "200+ syndications including AP-style national distribution" },
+      { name: "Ultimate", fatjoePrice: 1360, ourPrice: 2720, fatjoeDelivery: 7, ourDelivery: 10, note: "400+ syndications, PR Newswire / Business Wire, multimedia support" },
     ],
     features: [
       "Professional press release writing",
@@ -293,7 +297,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Brand mentions place your law firm name in editorial content across high-authority websites  -  with or without a live hyperlink. Mention signals are a Google ranking factor and build the entity presence that supports long-term E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) authority for Your Money Your Life (YMYL) legal content.",
     tiers: [
-      { name: "Standard", fatjoePrice: 2015, ourPrice: 4030, fatjoeDelivery: 14, ourDelivery: 17 },
+      { name: "Standard", fatjoePrice: 2015, ourPrice: 4030, fatjoeDelivery: 14, ourDelivery: 17, note: "10-15 placements on DR30-60 editorial sites" },
     ],
     features: [
       "10-15 brand mention placements across DR30-60 editorial sites",
@@ -327,7 +331,7 @@ export const PRODUCTS: Product[] = [
     description:
       "A full digital PR campaign that earns editorial coverage on major national publications. The highest-authority link acquisition strategy available  -  ideal for law firms competing on the most valuable keywords in personal injury, mass tort, criminal defense, and other high-stakes practice areas.",
     tiers: [
-      { name: "Standard", fatjoePrice: 4408, ourPrice: 8816, fatjoeDelivery: 42, ourDelivery: 45 },
+      { name: "Standard", fatjoePrice: 4408, ourPrice: 8816, fatjoeDelivery: 42, ourDelivery: 45, note: "3-5 placements on DR70+ national publications" },
     ],
     features: [
       "3-5 placements on DR70+ national publications",

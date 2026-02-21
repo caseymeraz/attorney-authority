@@ -142,6 +142,15 @@ export default function PricingPage() {
               <p className="text-gray-600 max-w-2xl">{cat.description}</p>
             </div>
 
+            {cat.id === "link-building" && (
+              <div className="mb-8 bg-amber-50 border border-amber-200 rounded-xl px-6 py-4">
+                <p className="font-semibold text-amber-900 mb-1">Not sure where to start?</p>
+                <p className="text-sm text-amber-800">
+                  Most law firms begin with Blogger Outreach at DR20+ or DR30+. DR20+ is right for newer sites and local keywords. DR30+ is the most popular starting point for established firms in competitive markets.
+                </p>
+              </div>
+            )}
+
             <div className="space-y-6">
               {cat.products.map((p) => (
                 <div
@@ -181,8 +190,18 @@ export default function PricingPage() {
                               i % 2 === 0 ? "" : "bg-gray-50/50"
                             }`}
                           >
-                            <td className="px-6 py-3.5 font-medium text-gray-800">
-                              {tier.name}
+                            <td className="px-6 py-3.5">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="font-medium text-gray-800">{tier.name}</span>
+                                {tier.mostPopular && (
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-800">
+                                    Most Popular
+                                  </span>
+                                )}
+                              </div>
+                              {tier.note && (
+                                <p className="text-xs text-gray-500 mt-0.5">{tier.note}</p>
+                              )}
                             </td>
                             <td className="px-6 py-3.5 font-bold text-amber-700">
                               ${tier.ourPrice.toLocaleString()}
@@ -213,48 +232,6 @@ export default function PricingPage() {
         </section>
       ))}
 
-      {/* Summary */}
-      <section className="py-12 px-4 bg-white border-t border-gray-200">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">All Services  -  Quick Reference</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-200 bg-gray-50">
-                  <th className="text-left px-4 py-3 font-semibold text-gray-700">Service</th>
-                  <th className="px-4 py-3 font-semibold text-gray-700 text-right">Starting Price</th>
-                  <th className="px-4 py-3 font-semibold text-gray-700 text-right">Max Delivery</th>
-                </tr>
-              </thead>
-              <tbody>
-                {PRODUCTS.map((p) => {
-                  const minPrice = Math.min(...p.tiers.map((t) => t.ourPrice));
-                  const maxDelivery = Math.max(...p.tiers.map((t) => t.ourDelivery));
-                  return (
-                    <tr key={p.slug} className="border-b border-gray-100 hover:bg-amber-50/30 transition-colors">
-                      <td className="px-4 py-3">
-                        <Link
-                          href={`/products/${p.slug}`}
-                          className="font-medium text-gray-800 hover:text-amber-700 transition-colors"
-                        >
-                          {p.name}
-                        </Link>
-                      </td>
-                      <td className="px-4 py-3 text-right font-semibold text-amber-700">
-                        ${minPrice.toLocaleString()}
-                      </td>
-                      <td className="px-4 py-3 text-right text-gray-600">
-                        {maxDelivery} days
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
       {/* Volume note */}
       <section className="py-12 px-4 bg-amber-50 border-t border-amber-200">
         <div className="max-w-3xl mx-auto text-center">
@@ -277,7 +254,7 @@ export default function PricingPage() {
       <CtaBanner
         headline="Ready to place your first order?"
         subheadline="Browse product pages for full details on each service, then reach out to place your order."
-        primaryCta={{ label: "Browse Products", href: "/products/blogger-outreach" }}
+        primaryCta={{ label: "Browse Products", href: "/products" }}
         secondaryCta={{ label: "Contact Us", href: "/contact" }}
       />
     </>
