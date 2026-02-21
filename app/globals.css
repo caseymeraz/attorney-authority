@@ -2,25 +2,47 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111827;
+  --brand-navy: #0f172a;
+  --brand-gold: #b8860b;
+  --brand-gold-light: #d4a017;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-gold: var(--brand-gold);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter, 'Inter', system-ui, sans-serif);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Prose overrides for MDX content */
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: var(--brand-navy);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.prose a {
+  color: var(--brand-gold);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: var(--brand-gold-light);
 }
