@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import Breadcrumb from "@/components/marketing/breadcrumb";
 import CtaBanner from "@/components/shared/cta-banner";
@@ -319,6 +320,55 @@ export default function LawFirmLinkBuildingGuidePage() {
                   </Link>
                 </div>
               ))}
+            </div>
+            <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                A digital PR brief starts with something worth using
+              </h3>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                A placement and an earned reference answer different questions. For a PR
+                campaign, start with a problem that a journalist, consumer educator, or
+                another lawyer would want to help readers solve. Then build the resource,
+                check its claims, show how it works, pitch the relevant story, and keep the
+                resource current. The link is a possible result of someone finding the
+                resource useful, not a deliverable the publisher has promised.
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Consider GJEL Accident Attorneys&apos;{" "}
+                <a
+                  href="https://www.gjel.com/car-accidents/total-loss-calculator"
+                  className="font-semibold text-amber-800 underline underline-offset-2 hover:text-amber-950"
+                >
+                  total-loss calculator
+                </a>
+                . It gives California drivers a way to start a vehicle-value estimate or
+                review an insurer&apos;s offer. That is a concrete property-damage question
+                people face after a crash. The tool is an informational aid, not an
+                appraisal or an estimate of an injury claim. We have reviewed its entry
+                flow; we have not tested a completed valuation or measured links earned
+                by this campaign.
+              </p>
+              <figure className="mb-5">
+                <Image
+                  src="/images/gjel-total-loss-calculator-entry.jpg"
+                  alt="GJEL total-loss calculator entry screen with California plate and manual vehicle-entry options"
+                  width={1280}
+                  height={720}
+                  className="w-full h-auto rounded-lg border border-amber-200"
+                />
+                <figcaption className="text-xs text-gray-600 mt-2">
+                  The public entry screen shows the two ways to begin. No plate, VIN,
+                  insurer report, or completed valuation is shown.
+                </figcaption>
+              </figure>
+              <p className="font-semibold text-gray-900 mb-2">What to put in the brief:</p>
+              <ul className="list-disc pl-5 space-y-2 text-gray-700 text-sm leading-relaxed">
+                <li>The exact user question, jurisdiction, and limits of the answer.</li>
+                <li>The inputs, data sources, review owner, and a plan to correct or refresh the tool.</li>
+                <li>A short demo and real screenshots that let an editor inspect the experience.</li>
+                <li>Distinct pitches for outlets whose readers actually face that question.</li>
+                <li>Measurement of relevant citations, referral use, and updates over time.</li>
+              </ul>
             </div>
           </div>
 
